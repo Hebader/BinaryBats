@@ -7,6 +7,8 @@
 
             Console.WriteLine("hej");
 
+            Console.WriteLine("hihi");
+
         }
     }
 }
