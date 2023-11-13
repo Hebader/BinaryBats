@@ -4,8 +4,10 @@
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Välkommen");
 
             Console.WriteLine("hej");
+
 
         }
     }
