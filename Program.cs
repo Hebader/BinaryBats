@@ -4,6 +4,8 @@
     {
         static void Main(string[] args)
         {
+            User user = new User();
+            user.Input();
             
         }
 
@@ -14,7 +16,9 @@
 
             public void Input () 
             {
+                Console.WriteLine("Username: ");
                 Username = Console.ReadLine();
+                Console.WriteLine("Password: ");
                 Password = Console.ReadLine();
             }    
         }
