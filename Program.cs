@@ -9,6 +9,8 @@
             Console.WriteLine("hej");
 
             Console.WriteLine("Elias");
+
+            Console.WriteLine("Elias igen");
         }
     }
 }
