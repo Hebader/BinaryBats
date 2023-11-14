@@ -10,24 +10,24 @@ namespace Grupparbete
         private int userAttempts = 0;
         public void Run()
         {
-
             while (true)
             {
-                Console.Write("Enter your choice, 1, 2 or 3: ");
-                Console.WriteLine("1. Select Admin login");
-                Console.WriteLine("2. Select User Login");
+                Console.WriteLine("1. Admin login");
+                Console.WriteLine("2. User Login");
                 Console.WriteLine("3. Exit");
+
+                Console.Write("Enter your choice, 1, 2 or 3: ");
 
                 string choice = Console.ReadLine();
 
                 switch (choice)
                 {
                     case "1":
-                        AdminLogin();
+                        adminLogin();
                         break;
 
                     case "2":
-                        UserLogin();
+                        userLogin();
                         break;
 
                     case "3":
@@ -39,29 +39,65 @@ namespace Grupparbete
                         break;
                 }
             }
-
-
         }
-        private void AdminLogin()
+        private void adminLogin()
         {
-            string Username;
-            string Password;
+            if (adminAttempts < maxAttempts)
+            {
+                if (checkAdmin())
+                {
+                    Console.WriteLine("Successful login!");
+                }
+                else
+                {
+                    adminAttempts++;
+                    Console.WriteLine($"Invalid  credentials. Login Attempts left: {maxAttempts - adminAttempts}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Too many failed login attemps. Account has been locked");
+            }
+        }
+        private bool checkAdmin()
+        {
+            Console.Write("Username: ");
+            string adminUsername = Console.ReadLine();
 
-            Console.WriteLine("Username: ");
-            Username = Console.ReadLine();
-            Console.WriteLine("Password: ");
-            Password = Console.ReadLine();
+            Console.Write("Password: ");
+            string adminPassword = Console.ReadLine();
+
+            return adminUsername == "admin" && adminPassword == "123";
         }
 
-        private void UserLogin()
+        private void userLogin()
         {
-            string Username;
-            string Password;
+            if (userAttempts < maxAttempts)
+            {
+                if (checkUser())
+                {
+                    Console.WriteLine("Successful login!");
+                }
+                else
+                {
+                    userAttempts++;
+                    Console.WriteLine($"Invalid credentials. Attempts left: {maxAttempts - userAttempts}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Too many failed login attemps. Account has been locked");
+            }
+        }
+        private bool checkUser()
+        {
+            Console.Write("Username: ");
+            string userUsername = Console.ReadLine();
 
-            Console.WriteLine("Username: ");
-            Username = Console.ReadLine();
-            Console.WriteLine("Password: ");
-            Password = Console.ReadLine();
+            Console.Write("Password: ");
+            string userPassword = Console.ReadLine();
+
+            return userUsername == "user" && userPassword == "123";
         }
 
 
