@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Reflection.Metadata;
 
 namespace Grupparbete
@@ -25,6 +27,7 @@ namespace Grupparbete
                     case "1":
                         adminLogin();
                         break;
+
 
                     case "2":
                         userLogin();
@@ -58,6 +61,9 @@ namespace Grupparbete
             {
                 Console.WriteLine("Too many failed login attemps. Account has been locked");
             }
+
+            AddUser(); // Method for adding users
+
             static void Menu()
             {
 
@@ -71,6 +77,9 @@ namespace Grupparbete
                 {
                     case 1:
                         AddUser();
+                        break;
+
+                    case 2:
                         break;
 
 
@@ -121,7 +130,9 @@ namespace Grupparbete
             string adminPassword = Console.ReadLine();
 
             return adminUsername == "admin" && adminPassword == "123";
+
         }
+
 
         private void userLogin()
         {
@@ -157,20 +168,46 @@ namespace Grupparbete
         static void Main(string[] args)
         {
             Program user = new Program();
-            //user.Id = 1;
             user.Run();
             user.adminLogin();
 
+            static void Accounts()
+            {
+                List<BankAccount> userAccounts = new List<BankAccount>();
+                userAccounts.Add(new BankAccount("173556889", 20000));
+                userAccounts.Add(new BankAccount("587654321", 3000));
+                userAccounts.Add(new BankAccount("146853522", 2000));
 
-            //Admin user2 = new Admin();
-            //user2.Id = 2;
+                DisplayUserAccounts(userAccounts);
+            }
 
+            static void DisplayUserAccounts(List<BankAccount> accounts)
+            {
+                Console.WriteLine("Your bankaccount and salary:");
+                foreach (var account in accounts)
+                {
+                    Console.WriteLine($"Bankaccount: {account.AccountNumber}, Salary: {account.Balance:C}");
+                }
+            }
             //List<Owner> mylist = new List<Owner>();
             //mylist.Add(user);
             //mylist.Add(user2);
         }
+
+        class BankAccount
+        {
+            public string AccountNumber { get; }
+            public decimal Balance { get; set; }
+
+            public BankAccount(string accountNumber, decimal balance)
+            {
+                AccountNumber = accountNumber;
+                Balance = balance;
+            }
+        }
     }
 }
+
 
     //public class Login
     //{
