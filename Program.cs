@@ -3,14 +3,13 @@ using System.Reflection.Metadata;
 
 namespace Grupparbete
 {
-    internal class Program : Owner
+    internal class Program
     {
         private int maxAttempts = 3;
         private int adminAttempts = 0;
         private int userAttempts = 0;
         public void Run()
         {
-            
             while (true)
             {
                 Console.WriteLine("1. Admin login");
@@ -48,7 +47,6 @@ namespace Grupparbete
                 if (checkAdmin())
                 {
                     Console.WriteLine("Successful login!");
-                    
                 }
                 else
                 {
@@ -60,7 +58,7 @@ namespace Grupparbete
             {
                 Console.WriteLine("Too many failed login attemps. Account has been locked");
             }
-             static void Menu()
+            static void Menu()
             {
 
                 Console.WriteLine("1. add user");
@@ -164,34 +162,35 @@ namespace Grupparbete
             user.adminLogin();
 
 
-            Admin user2 = new Admin();
-            user2.Id = 2;
+            //Admin user2 = new Admin();
+            //user2.Id = 2;
 
             //List<Owner> mylist = new List<Owner>();
             //mylist.Add(user);
             //mylist.Add(user2);
         }
     }
-
-    public class Login
-    {
-
-
-    }
-
-    public class Owner : Login
-    {
-        public int Id { get; set; }
-
-
-    //}
-
-    //public class User : Owner
-    //{
-
-    //}
-    //public class Admin : Owner
-    //{
-
-    //}
 }
+    
+
+    //public class Login
+    //{
+
+
+//}
+
+//public class Owner : Login
+//{
+//    public int Id { get; set; }
+
+
+//}
+
+//public class User : Owner
+//{
+
+//}
+//public class Admin : Owner
+//{
+
+//}
