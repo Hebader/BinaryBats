@@ -10,10 +10,14 @@ namespace Grupparbete
         private int maxAttempts = 3;
         private int adminAttempts = 0;
         private int userAttempts = 0;
+        
         public void Run()
         {
+
+            bool condition = true;
             while (true)
             {
+               
                 Console.WriteLine("1. Admin login");
                 Console.WriteLine("2. User Login");
                 Console.WriteLine("3. Exit");
@@ -34,12 +38,16 @@ namespace Grupparbete
                         break;
 
                     case "3":
-                        Console.WriteLine("Exiting program.");
+                        Console.WriteLine("Exiting program.");     
                         return;
 
                     default:
                         Console.WriteLine("Invalid choice. Please enter a valid option.");
                         break;
+                }
+                if (condition)
+                {
+                    break; // Loopen avbryts om villkoret har uppfyllts 
                 }
             }
         }
@@ -171,12 +179,10 @@ namespace Grupparbete
             user.Run();
             user.adminLogin();
 
-            static void Accounts()
-            {
-                List<BankAccount> userAccounts = new List<BankAccount>();
-                userAccounts.Add(new BankAccount("173556889", 20000));
-                userAccounts.Add(new BankAccount("587654321", 3000));
-                userAccounts.Add(new BankAccount("146853522", 2000));
+        List<BankAccount> userAccounts = new List<BankAccount>();
+        userAccounts.Add(new BankAccount("173556889", 20000));
+        userAccounts.Add(new BankAccount("587654321", 3000));
+        userAccounts.Add(new BankAccount("146853522", 2000));
 
                 DisplayUserAccounts(userAccounts);
             }
@@ -206,7 +212,7 @@ namespace Grupparbete
             }
         }
     }
-}
+
 
 
     //public class Login
