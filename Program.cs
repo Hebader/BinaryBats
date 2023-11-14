@@ -112,6 +112,11 @@ namespace Grupparbete
                         userList.Add(userName);
 
                         Console.WriteLine("user is added");
+                        Console.WriteLine("\n userlist: ");
+                        foreach (var user in userList)
+                        {
+                            Console.WriteLine(user);
+                        }
                         break;
 
                     }
@@ -122,14 +127,10 @@ namespace Grupparbete
 
                 }
 
-                Console.WriteLine("\n userlist: ");
-                foreach (var user in userList)
-                {
-                    Console.WriteLine(user);
-                }
+                
             }
         }
-        private bool checkAdmin()
+        private bool checkAdmin() // Körs en extra gång efter break?
         {
             Console.Write("Username: ");
             string adminUsername = Console.ReadLine();
@@ -189,15 +190,13 @@ namespace Grupparbete
 
             static void DisplayUserAccounts(List<BankAccount> accounts)
             {
-                Console.WriteLine("Your bankaccount and salary:");
+                Console.WriteLine("Your bankaccounts and salary:");
                 foreach (var account in accounts)
                 {
                     Console.WriteLine($"Bankaccount: {account.AccountNumber}, Salary: {account.Balance:C}");
                 }
             }
-            //List<Owner> mylist = new List<Owner>();
-            //mylist.Add(user);
-            //mylist.Add(user2);
+          
         }
 
         class BankAccount
