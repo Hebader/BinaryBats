@@ -3,7 +3,7 @@ using System.Reflection.Metadata;
 
 namespace Grupparbete
 {
-    internal class Program
+    internal class Program //
     {
         private int maxAttempts = 3;
         private int adminAttempts = 0;
@@ -171,9 +171,6 @@ namespace Grupparbete
         }
     }
 }
-    
-
-    // hej hej
 
     //public class Login
     //{
