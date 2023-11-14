@@ -3,7 +3,7 @@ using System.Reflection.Metadata;
 
 namespace Grupparbete
 {
-    internal class Program : Owner
+    internal class Program :Owner
     {
         private int maxAttempts = 3;
         private int adminAttempts = 0;
@@ -108,8 +108,9 @@ namespace Grupparbete
             user.Run();
 
 
-            Admin user2 = new Admin();
+            Program user2 = new Program();
             user2.Id = 2;
+            user.Run();
 
             List<Owner> mylist = new List<Owner>();
             mylist.Add(user);
@@ -117,13 +118,9 @@ namespace Grupparbete
         }
     }
 
-    public class Login
-    {
+ 
 
-
-    }
-
-    public class Owner : Login
+    public class Owner
     {
         public int Id { get; set; }
 
