@@ -173,22 +173,21 @@ namespace Grupparbete
             return userUsername == "user" && userPassword == "123";
         }
 
-
-        static void Main(string[] args)
+        private void RunLoginSystem()
         {
-            Program user = new Program();
-            user.Run();
-            user.adminLogin();
 
+        }
+
+        private List<BankAccount> CreateBankAccounts()
+        {
             List<BankAccount> userAccounts = new List<BankAccount>();
             userAccounts.Add(new BankAccount("173556889", 20000));
             userAccounts.Add(new BankAccount("587654321", 3000));
             userAccounts.Add(new BankAccount("146853522", 2000));
-
-            DisplayUserAccounts(userAccounts);
+            return userAccounts;
         }
-        
-        static void DisplayUserAccounts(List<BankAccount> accounts)
+
+        private void DisplayUserAccounts(List<BankAccount> accounts)
         {
             Console.WriteLine("Your bankaccounts and salary:");
             foreach (var account in accounts)
@@ -196,10 +195,23 @@ namespace Grupparbete
                 Console.WriteLine($"Bankaccount: {account.AccountNumber}, Salary: {account.Balance:C}");
             }
         }
+        public void RunApplication()
+        {
+            Run();
+            adminLogin();
+            List<BankAccount> userAccounts = CreateBankAccounts();
+            DisplayUserAccounts(userAccounts);
+        }
+
+        static void Main(string[] args)
+        {
+
+            Program program = new Program();
+            program.RunApplication();
+        }
 
 
     }
-
     class BankAccount
     {
         public string AccountNumber { get; } //Vill få värdet men inte kunna ändra
@@ -210,9 +222,20 @@ namespace Grupparbete
             AccountNumber = accountNumber;
             Balance = balance;
         }
+
     }
-   
-}
+
+    
+
+    }
+
+
+
+
+
+
+
+
 
 
 
