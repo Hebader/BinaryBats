@@ -10,14 +10,14 @@ namespace Grupparbete
         private int maxAttempts = 3;
         private int adminAttempts = 0;
         private int userAttempts = 0;
-        
+
         public void Run()
         {
 
             bool condition = true;
             while (true)
             {
-               
+
                 Console.WriteLine("1. Admin login");
                 Console.WriteLine("2. User Login");
                 Console.WriteLine("3. Exit");
@@ -38,7 +38,7 @@ namespace Grupparbete
                         break;
 
                     case "3":
-                        Console.WriteLine("Exiting program.");     
+                        Console.WriteLine("Exiting program.");
                         return;
 
                     default:
@@ -127,7 +127,7 @@ namespace Grupparbete
 
                 }
 
-                
+
             }
         }
         private bool checkAdmin() // Körs en extra gång efter break?
@@ -180,52 +180,42 @@ namespace Grupparbete
             user.Run();
             user.adminLogin();
 
-        List<BankAccount> userAccounts = new List<BankAccount>();
-        userAccounts.Add(new BankAccount("173556889", 20000));
-        userAccounts.Add(new BankAccount("587654321", 3000));
-        userAccounts.Add(new BankAccount("146853522", 2000));
+            List<BankAccount> userAccounts = new List<BankAccount>();
+            userAccounts.Add(new BankAccount("173556889", 20000));
+            userAccounts.Add(new BankAccount("587654321", 3000));
+            userAccounts.Add(new BankAccount("146853522", 2000));
 
-                DisplayUserAccounts(userAccounts);
-            }
-
-            static void DisplayUserAccounts(List<BankAccount> accounts)
-            {
-                Console.WriteLine("Your bankaccounts and salary:");
-                foreach (var account in accounts)
-                {
-                    Console.WriteLine($"Bankaccount: {account.AccountNumber}, Salary: {account.Balance:C}");
-                }
-            }
-          
+            DisplayUserAccounts(userAccounts);
         }
-
-        class BankAccount
+        
+        static void DisplayUserAccounts(List<BankAccount> accounts)
         {
-            public string AccountNumber { get; }
-            public decimal Balance { get; set; }
-
-            public BankAccount(string accountNumber, decimal balance)
+            Console.WriteLine("Your bankaccounts and salary:");
+            foreach (var account in accounts)
             {
-                AccountNumber = accountNumber;
-                Balance = balance;
+                Console.WriteLine($"Bankaccount: {account.AccountNumber}, Salary: {account.Balance:C}");
             }
         }
+
+
     }
 
+    class BankAccount
+    {
+        public string AccountNumber { get; } //Vill få värdet men inte kunna ändra
+        public decimal Balance { get; set; } // Värdet kan ändras med set
+
+        public BankAccount(string accountNumber, decimal balance) //Konstruktor för kontonmr och saldo
+        {
+            AccountNumber = accountNumber;
+            Balance = balance;
+        }
+    }
+   
+}
 
 
-    //public class Login
-    //{
 
-
-//}
-
-//public class Owner : Login
-//{
-//    public int Id { get; set; }
-
-
-//}
 
 //public class User : Owner
 //{
