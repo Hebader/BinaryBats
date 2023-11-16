@@ -201,6 +201,7 @@ namespace Grupparbete
             adminLogin();
             List<BankAccount> userAccounts = CreateBankAccounts();
             DisplayUserAccounts(userAccounts);
+           
         }
 
         static void Main(string[] args)
@@ -222,12 +223,31 @@ namespace Grupparbete
             AccountNumber = accountNumber;
             Balance = balance;
         }
+        public void Transfer(BankAccount destination)
+        {
+            Console.WriteLine("how much do you want to transfer?");
 
+            decimal amount = decimal.Parse(Console.ReadLine()); //TODO: error handling
+
+            if (amount > 0 && Balance >= amount)
+            {
+
+                destination.Balance = destination.Balance + amount;
+                Balance = Balance - amount;
+                Console.WriteLine($"transfer successful! {amount} transferd");
+            }
+            else
+            {
+                Console.WriteLine("transfer failed!");
+            }
+
+            Console.WriteLine($"before transfer: account 1: {userAccounts.Balance} - acount 2: {account2.Balance}");
+            account1.Transfer(account2);
+            Console.WriteLine($"after transfer: account 1: {account1.Balance} - acount 2: {account2.Balance}");
+        }
     }
 
-    
-
-    }
+}
 
 
 
