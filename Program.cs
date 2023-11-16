@@ -201,7 +201,7 @@ namespace Grupparbete
             List<BankAccount> userAccounts = CreateBankAccounts();
             DisplayUserAccounts(userAccounts);
 
-            if(userAccounts.Count >= 2)
+            if(userAccounts.Count >= 2) //Om det finns minst två konton eller fler
     {
                 BankAccount sourceAccount = userAccounts[0]; // skapar en variabel örsta kontot
                 BankAccount destinationAccount = userAccounts[1]; // Andra kontot
