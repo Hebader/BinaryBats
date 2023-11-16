@@ -200,7 +200,18 @@ namespace Grupparbete
             adminLogin();
             List<BankAccount> userAccounts = CreateBankAccounts();
             DisplayUserAccounts(userAccounts);
-           
+
+            if(userAccounts.Count >= 2)
+    {
+                BankAccount sourceAccount = userAccounts[0];
+                BankAccount destinationAccount = userAccounts[1];
+
+                Console.WriteLine("start transfer...");
+                sourceAccount.Transfer(destinationAccount);
+                Console.WriteLine("Updated account balances after transfer:");
+                DisplayUserAccounts(userAccounts);
+            }
+
         }
 
         static void Main(string[] args)
