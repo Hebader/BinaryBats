@@ -203,13 +203,13 @@ namespace Grupparbete
 
             if(userAccounts.Count >= 2)
     {
-                BankAccount sourceAccount = userAccounts[0];
-                BankAccount destinationAccount = userAccounts[1];
+                BankAccount sourceAccount = userAccounts[0]; // skapar en variabel örsta kontot
+                BankAccount destinationAccount = userAccounts[1]; // Andra kontot
 
                 Console.WriteLine("start transfer...");
-                sourceAccount.Transfer(destinationAccount);
+                sourceAccount.Transfer(destinationAccount); // Gör överföringen mellan första och andra kontot
                 Console.WriteLine("Updated account balances after transfer:");
-                DisplayUserAccounts(userAccounts);
+                DisplayUserAccounts(userAccounts); // Utskrift av nya saldon
             }
 
         }
