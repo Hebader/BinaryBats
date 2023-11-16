@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Reflection.Metadata;
 
 namespace Grupparbete
@@ -8,10 +10,14 @@ namespace Grupparbete
         private int maxAttempts = 3;
         private int adminAttempts = 0;
         private int userAttempts = 0;
+
         public void Run()
         {
+
+            bool condition = true;
             while (true)
             {
+
                 Console.WriteLine("1. Admin login");
                 Console.WriteLine("2. User Login");
                 Console.WriteLine("3. Exit");
@@ -26,6 +32,7 @@ namespace Grupparbete
                         adminLogin();
                         break;
 
+
                     case "2":
                         userLogin();
                         break;
@@ -37,6 +44,10 @@ namespace Grupparbete
                     default:
                         Console.WriteLine("Invalid choice. Please enter a valid option.");
                         break;
+                }
+                if (condition)
+                {
+                    break; // Loopen avbryts om villkoret har uppfyllts 
                 }
             }
         }
@@ -58,6 +69,9 @@ namespace Grupparbete
             {
                 Console.WriteLine("Too many failed login attemps. Account has been locked");
             }
+
+            AddUser(); // Method for adding users
+
             static void Menu()
             {
 
@@ -71,6 +85,9 @@ namespace Grupparbete
                 {
                     case 1:
                         AddUser();
+                        break;
+
+                    case 2:
                         break;
 
 
@@ -95,6 +112,11 @@ namespace Grupparbete
                         userList.Add(userName);
 
                         Console.WriteLine("user is added");
+                        Console.WriteLine("\n userlist: ");
+                        foreach (var user in userList)
+                        {
+                            Console.WriteLine(user);
+                        }
                         break;
 
                     }
@@ -105,14 +127,10 @@ namespace Grupparbete
 
                 }
 
-                Console.WriteLine("\n userlist: ");
-                foreach (var user in userList)
-                {
-                    Console.WriteLine(user);
-                }
+
             }
         }
-        private bool checkAdmin()
+        private bool checkAdmin() // Körs en extra gång efter break?
         {
             Console.Write("Username: ");
             string adminUsername = Console.ReadLine();
@@ -121,7 +139,9 @@ namespace Grupparbete
             string adminPassword = Console.ReadLine();
 
             return adminUsername == "admin" && adminPassword == "123";
+
         }
+
 
         private void userLogin()
         {
@@ -153,37 +173,72 @@ namespace Grupparbete
             return userUsername == "user" && userPassword == "123";
         }
 
+        private void RunLoginSystem()
+        {
+
+        }
+        //
+        private List<BankAccount> CreateBankAccounts()
+        {
+            List<BankAccount> userAccounts = new List<BankAccount>();
+            userAccounts.Add(new BankAccount("173556889", 20000));
+            userAccounts.Add(new BankAccount("587654321", 3000));
+            userAccounts.Add(new BankAccount("146853522", 2000));
+            return userAccounts;
+        }
+
+        private void DisplayUserAccounts(List<BankAccount> accounts)
+        {
+            Console.WriteLine("Your bankaccounts and salary:");
+            foreach (var account in accounts)
+            {
+                Console.WriteLine($"Bankaccount: {account.AccountNumber}, Salary: {account.Balance:C}");
+            }
+        }
+        public void RunApplication()
+        {
+            Run();
+            adminLogin();
+            List<BankAccount> userAccounts = CreateBankAccounts();
+            DisplayUserAccounts(userAccounts);
+        }
 
         static void Main(string[] args)
         {
-            Program user = new Program();
-            //user.Id = 1;
-            user.Run();
-            user.adminLogin();
 
-
-            //Admin user2 = new Admin();
-            //user2.Id = 2;
-
-            //List<Owner> mylist = new List<Owner>();
-            //mylist.Add(user);
-            //mylist.Add(user2);
+            Program program = new Program();
+            program.RunApplication();
         }
+
+
     }
-}
+    class BankAccount
+    {
+        public string AccountNumber { get; } //Vill få värdet men inte kunna ändra
+        public decimal Balance { get; set; } // Värdet kan ändras med set
 
-    //public class Login
-    //{
+        public BankAccount(string accountNumber, decimal balance) //Konstruktor för kontonmr och saldo
+        {
+            AccountNumber = accountNumber;
+            Balance = balance;
+        }
+
+    }
+
+    
+
+    }
 
 
-//}
-
-//public class Owner : Login
-//{
-//    public int Id { get; set; }
 
 
-//}
+
+
+
+
+
+
+
 
 //public class User : Owner
 //{
