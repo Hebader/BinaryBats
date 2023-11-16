@@ -130,16 +130,18 @@ namespace Grupparbete
 
             }
         }
-        private bool checkAdmin() // Körs en extra gång efter break?
+
+            public bool checkAdmin() // Körs en extra gång efter break?
         {
-            Console.Write("Username: ");
-            string adminUsername = Console.ReadLine();
+                  
+                Console.Write("Username: ");
+                string adminUsername = Console.ReadLine();
 
-            Console.Write("Password: ");
-            string adminPassword = Console.ReadLine();
+                Console.Write("Password: ");
+                string adminPassword = Console.ReadLine();
 
-            return adminUsername == "admin" && adminPassword == "123";
-
+                return adminUsername == "admin" && adminPassword == "123";
+            
         }
 
 
@@ -172,12 +174,7 @@ namespace Grupparbete
 
             return userUsername == "user" && userPassword == "123";
         }
-
-        private void RunLoginSystem()
-        {
-
-        }
-        //
+        
         private List<BankAccount> CreateBankAccounts()
         {
             List<BankAccount> userAccounts = new List<BankAccount>();
@@ -195,6 +192,8 @@ namespace Grupparbete
                 Console.WriteLine($"Bankaccount: {account.AccountNumber}, Salary: {account.Balance:C}");
             }
         }
+
+        
         public void RunApplication()
         {
             Run();
@@ -241,9 +240,7 @@ namespace Grupparbete
                 Console.WriteLine("transfer failed!");
             }
 
-            Console.WriteLine($"before transfer: account 1: {userAccounts.Balance} - acount 2: {account2.Balance}");
-            account1.Transfer(account2);
-            Console.WriteLine($"after transfer: account 1: {account1.Balance} - acount 2: {account2.Balance}");
+            
         }
     }
 
