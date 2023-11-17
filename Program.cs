@@ -302,21 +302,16 @@ namespace Grupparbete
 
         {
 
-            if (checkUser()) // körs bara om man loggar in som user
+            Console.WriteLine("Your bankaccounts and salary:");
+
+            foreach (var account in accounts)
 
             {
 
-                Console.WriteLine("Your bankaccounts and salary:");
-
-                foreach (var account in accounts)
-
-                {
-
-                    Console.WriteLine($"Bankaccount: {account.AccountNumber}, Salary: {account.Balance:C}");
-
-                }
+                Console.WriteLine($"Bankaccount: {account.AccountNumber}, Salary: {account.Balance:C}");
 
             }
+
 
         }
 
