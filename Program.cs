@@ -1,10 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
+using System.Globalization;
+using System.Reflection.Metadata;
 
 namespace Grupparbete
 {
-    internal class Program
+    internal class Program 
+
     {
+        static void Main(string[] args)
+        {
+
+            Program program = new Program();
+            program.RunApplication();
+        }
+
         private int maxAttempts = 3;
         private int adminAttempts = 0;
         private int userAttempts = 0;
@@ -155,6 +166,7 @@ namespace Grupparbete
             }
         }
 
+
         public bool checkAdmin()
         {
             Console.Write("Username: ");
@@ -164,7 +176,7 @@ namespace Grupparbete
             string adminPassword = Console.ReadLine();
 
             return adminUsername == "admin" && adminPassword == "123";
-        }
+         }
 
         private void userLogin()
         {
@@ -254,42 +266,99 @@ namespace Grupparbete
             }
         }
 
-        public static void Main(string[] args)
-        {
-            Program program = new Program();
-            program.Run();
-        }
+       
     }
 
-    class BankAccount
+  /*   class BankAccount
     {
         public string AccountNumber { get; } //Vill få värdet men inte kunna ändra
         public decimal Balance { get; set; } // Värdet kan ändras med set
 
-        public BankAccount(string accountNumber, decimal balance) //Konstruktor för kontonmr och saldo
-        {
-            AccountNumber = accountNumber;
-            Balance = balance;
+            adminLogin();
+            List<BankAccount> userAccounts = CreateBankAccounts();
+            DisplayUserAccounts(userAccounts);
+
+            while (true)
+            {
+                Console.WriteLine("do you want to transfer? yes/no ");
+
+                string answer = Console.ReadLine();
+
+                if (answer == "yes")
+                {
+                    if (userAccounts.Count >= 2) //Om det finns minst två konton eller fler
+                    {
+                        BankAccount sourceAccount = userAccounts[0]; // skapar en variabel örsta kontot
+                        BankAccount destinationAccount = userAccounts[1]; // Andra kontot
+
+                        Console.WriteLine("transfer...");
+                        sourceAccount.Transfer(destinationAccount); // Gör överföringen mellan första och andra kontot
+                        Console.WriteLine("Updated account balances after transfer:");
+                        DisplayUserAccounts(userAccounts); // Utskrift av nya saldon
+                    }
+
+                    break;
+
+                }
+                else if (answer == "no")
+                {
+                    break;
+                }
+
+            } */
+
+
         }
-        public void Transfer(BankAccount destination)
+        class BankAccount
         {
-            Console.WriteLine("how much do you want to transfer?");
+            public string AccountNumber { get; } //Vill få värdet men inte kunna ändra
+            public decimal Balance { get; set; } // Värdet kan ändras med set
 
-            decimal amount = decimal.Parse(Console.ReadLine()); //TODO: error handling
-
-            if (amount > 0 && Balance >= amount)
+            public BankAccount(string accountNumber, decimal balance) //Konstruktor för kontonmr och saldo
             {
-
-                destination.Balance = destination.Balance + amount;
-                Balance = Balance - amount;
-                Console.WriteLine($"transfer successful! {amount} transferd");
+                AccountNumber = accountNumber;
+                Balance = balance;
             }
-            else
+            public void Transfer(BankAccount destination)
             {
-                Console.WriteLine("transfer failed!");
-            }
+                Console.WriteLine("how much do you want to transfer?");
+
 
 
         }
     }
 }
+                decimal amount = decimal.Parse(Console.ReadLine()); //TODO: error handling
+
+                if (amount > 0 && Balance >= amount)
+                {
+
+                    destination.Balance = destination.Balance + amount;
+                    Balance = Balance - amount;
+                    Console.WriteLine($"transfer successful! {amount} transferd");
+                }
+                else
+                {
+                    Console.WriteLine("transfer failed!");
+                }
+
+
+            }
+        }
+    }
+}
+
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
