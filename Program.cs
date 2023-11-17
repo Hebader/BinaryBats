@@ -36,6 +36,10 @@ namespace Grupparbete
                 {
                     case "1":
                         adminLogin();
+                        if (true)
+                        {
+                            Menu();
+                        }
                         break;
 
                     case "2":
@@ -55,6 +59,7 @@ namespace Grupparbete
 
         public void adminLogin()
         {
+            
             if (adminAttempts < maxAttempts)
             {
                 if (checkAdmin())
@@ -74,6 +79,11 @@ namespace Grupparbete
             }
         }
 
+
+            
+        }
+        
+              
         public void AdminMenu()
         {
             while (true)
@@ -83,6 +93,7 @@ namespace Grupparbete
                 Console.WriteLine("3. Logout");
 
                 Console.WriteLine("Choose between 1, 2, or 3");
+
                 int menu = Convert.ToInt32(Console.ReadLine());
 
                 switch (menu)
@@ -95,12 +106,35 @@ namespace Grupparbete
                         AdminBankAccounts();
                         break;
 
-                    case 3:
+                    case
                         return; // Logga ut
 
                     default:
                         Console.WriteLine("Invalid choice. Please enter a valid option.");
                         break;
+
+            }
+        }
+        static bool AddUser()
+        {
+            List<string> userList = new List<string>();
+
+            while (true)
+            {
+                Console.WriteLine("do you want to add a user? yes/no ");
+
+                string answer = Console.ReadLine();
+
+                if (answer == "yes")
+                {
+                    Console.WriteLine("write username: ");
+                    string userName = Console.ReadLine();
+
+                    userList.Add(userName);
+
+                    Console.WriteLine("user is added");
+                    Console.WriteLine("\n userlist: ");
+
                 }
             }
         }
@@ -154,14 +188,22 @@ namespace Grupparbete
 
                     Console.WriteLine("User is added");
                     Console.WriteLine("\n Userlist:");
+                  
                     foreach (var user in userList)
                     {
                         Console.WriteLine(user);
                     }
+                    
+                }
+                else if (answer == "no")
+                {
+                    return false;
+
                 }
                 else if (answer.ToLower() == "no")
                 {
                     break;
+
                 }
             }
         }
@@ -176,7 +218,8 @@ namespace Grupparbete
             string adminPassword = Console.ReadLine();
 
             return adminUsername == "admin" && adminPassword == "123";
-         }
+        }
+
 
         private void userLogin()
         {
@@ -213,9 +256,15 @@ namespace Grupparbete
         private List<BankAccount> CreateBankAccounts()
         {
             List<BankAccount> userAccounts = new List<BankAccount>();
-            userAccounts.Add(new BankAccount("173556889", 20000));
-            userAccounts.Add(new BankAccount("587654321", 3000));
-            userAccounts.Add(new BankAccount("146853522", 2000));
+            BankAccount acoount1 = new BankAccount("173556889", 20000);
+            BankAccount acoount2 = new BankAccount("587654321", 3000);
+            BankAccount acoount3 = new BankAccount("146853522", 2000);
+
+            userAccounts.Add(acoount1);
+            userAccounts.Add(acoount2);
+            userAccounts.Add(acoount3);
+
+ 
             return userAccounts;
         }
 
@@ -225,16 +274,22 @@ namespace Grupparbete
             userAccounts.Add(new BankAccount("463718293", 20000));
             userAccounts.Add(new BankAccount("175019005", 3000));
             userAccounts.Add(new BankAccount("658392098", 2000));
+          
+          // Lägg till  add här
             return userAccounts;
         }
 
         private void DisplayUserAccounts(List<BankAccount> accounts)
         {
-            Console.WriteLine("Your bankaccounts and salary:");
-            foreach (var account in accounts)
+            if (checkUser()) // körs bara om man loggar in som user
             {
-                Console.WriteLine($"Bankaccount: {account.AccountNumber}, Salary: {account.Balance:C}");
+                Console.WriteLine("Your bankaccounts and salary:");
+                foreach (var account in accounts)
+                {
+                    Console.WriteLine($"Bankaccount: {account.AccountNumber}, Salary: {account.Balance:C}");
+                }
             }
+           
         }
 
 
@@ -311,6 +366,7 @@ namespace Grupparbete
         }
         class BankAccount
         {
+
             public string AccountNumber { get; } //Vill få värdet men inte kunna ändra
             public decimal Balance { get; set; } // Värdet kan ändras med set
 
@@ -320,31 +376,26 @@ namespace Grupparbete
                 Balance = balance;
             }
             public void Transfer(BankAccount destination)
-            {
-                Console.WriteLine("how much do you want to transfer?");
+{
+    Console.WriteLine("how much do you want to transfer?");
 
+    decimal amount = decimal.Parse(Console.ReadLine()); //TODO: error handling
 
+    if (amount > 0 && Balance >= amount)
+    {
 
-        }
+        destination.Balance = destination.Balance + amount;
+        Balance = Balance - amount;
+        Console.WriteLine($"transfer successful! {amount} transferd");
     }
-}
-                decimal amount = decimal.Parse(Console.ReadLine()); //TODO: error handling
-
-                if (amount > 0 && Balance >= amount)
-                {
-
-                    destination.Balance = destination.Balance + amount;
-                    Balance = Balance - amount;
-                    Console.WriteLine($"transfer successful! {amount} transferd");
-                }
-                else
-                {
-                    Console.WriteLine("transfer failed!");
-                }
+    else
+    {
+        Console.WriteLine("transfer failed!");
+    }
 
 
-            }
-        }
+           
+           
     }
 }
 
