@@ -200,6 +200,37 @@ namespace Grupparbete
 
         }
 
+        public void AdminMenu()
+        {
+            while (true)
+            {
+                Console.WriteLine("1. Add user");
+                Console.WriteLine("2. Check saldo");
+                Console.WriteLine("3. Logout");
+
+                Console.WriteLine("Choose between 1, 2, or 3");
+                int menu = Convert.ToInt32(Console.ReadLine());
+
+                switch (menu)
+                {
+                    case 1:
+                        AddUser();
+                        break;
+
+                    case 2:
+                        AdminBankAccounts();
+                        break;
+
+                    case 3:
+                        return; // Logga ut
+
+                    default:
+                        Console.WriteLine("Invalid choice. Please enter a valid option.");
+                        break;
+                }
+            }
+        }
+
         void UserMenu()
 
         { //Lagt till en Usermenu och loopat
