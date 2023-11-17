@@ -338,7 +338,7 @@ namespace Grupparbete
                 Console.WriteLine("do you want to transfer? yes/no ");
 
                 string answer = Console.ReadLine();
-
+                //
                 if (answer == "yes")
                 {
                     if (userAccounts.Count >= 2) //Om det finns minst två konton eller fler
