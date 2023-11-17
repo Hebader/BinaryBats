@@ -6,8 +6,7 @@ using System.Reflection.Metadata;
 
 namespace Grupparbete
 {
-    internal class Program 
-
+    internal class Program
     {
         static void Main(string[] args)
         {
@@ -38,7 +37,7 @@ namespace Grupparbete
                         adminLogin();
                         if (true)
                         {
-                            Menu();
+                            AdminMenu();
                         }
                         break;
 
@@ -59,7 +58,7 @@ namespace Grupparbete
 
         public void adminLogin()
         {
-            
+
             if (adminAttempts < maxAttempts)
             {
                 if (checkAdmin())
@@ -78,67 +77,50 @@ namespace Grupparbete
                 Console.WriteLine("Too many failed login attempts. Account has been locked");
             }
         }
-
-
-            
-        }
-        
-              
-        public void AdminMenu()
+        void userLogin()
         {
-            while (true)
+            if (userAttempts < maxAttempts)
             {
-                Console.WriteLine("1. Add user");
-                Console.WriteLine("2. Check saldo");
-                Console.WriteLine("3. Logout");
-
-                Console.WriteLine("Choose between 1, 2, or 3");
-
-                int menu = Convert.ToInt32(Console.ReadLine());
-
-                switch (menu)
+                if (checkUser())
                 {
-                    case 1:
-                        AddUser();
-                        break;
-
-                    case 2:
-                        AdminBankAccounts();
-                        break;
-
-                    case
-                        return; // Logga ut
-
-                    default:
-                        Console.WriteLine("Invalid choice. Please enter a valid option.");
-                        break;
-
-            }
-        }
-        static bool AddUser()
-        {
-            List<string> userList = new List<string>();
-
-            while (true)
-            {
-                Console.WriteLine("do you want to add a user? yes/no ");
-
-                string answer = Console.ReadLine();
-
-                if (answer == "yes")
+                    Console.WriteLine("Successful login!");
+                    UserMenu(); //Lagt in meny för user som i "Adminmenyn"
+                }
+                else
                 {
-                    Console.WriteLine("write username: ");
-                    string userName = Console.ReadLine();
-
-                    userList.Add(userName);
-
-                    Console.WriteLine("user is added");
-                    Console.WriteLine("\n userlist: ");
-
+                    userAttempts++;
+                    Console.WriteLine($"Invalid credentials. Attempts left: {maxAttempts - userAttempts}");
                 }
             }
+            else
+            {
+                Console.WriteLine("Too many failed login attempts. Account has been locked");
+            }
         }
-        public void UserMenu()
+
+        bool checkAdmin()
+        {
+            Console.Write("Username: ");
+            string adminUsername = Console.ReadLine();
+
+            Console.Write("Password: ");
+            string adminPassword = Console.ReadLine();
+
+            return adminUsername == "admin" && adminPassword == "123";
+        }
+
+        bool checkUser()
+        {
+            Console.Write("Username: ");
+            string userUsername = Console.ReadLine();
+
+            Console.Write("Password: ");
+            string userPassword = Console.ReadLine();
+
+            return userUsername == "user" && userPassword == "123";
+        }
+
+        void UserMenu()
         { //Lagt till en Usermenu och loopat
             while (true)
             {
@@ -169,7 +151,45 @@ namespace Grupparbete
             }
         }
 
-        public void AddUser()
+        List<BankAccount> CreateBankAccounts()
+        {
+            List<BankAccount> userAccounts = new List<BankAccount>();
+            BankAccount acoount1 = new BankAccount("173556889", 20000);
+            BankAccount acoount2 = new BankAccount("587654321", 3000);
+            BankAccount acoount3 = new BankAccount("146853522", 2000);
+
+            userAccounts.Add(acoount1);
+            userAccounts.Add(acoount2);
+            userAccounts.Add(acoount3);
+
+
+            return userAccounts;
+        }
+
+        List<BankAccount> AdminBankAccounts()
+        { //Lagt till en lista med bankkonto för admin
+            List<BankAccount> userAccounts = new List<BankAccount>();
+            userAccounts.Add(new BankAccount("463718293", 20000));
+            userAccounts.Add(new BankAccount("175019005", 3000));
+            userAccounts.Add(new BankAccount("658392098", 2000));
+
+            // Lägg till  add här
+            return userAccounts;
+        }
+        private void DisplayUserAccounts(List<BankAccount> accounts)
+        {
+            if (checkUser()) // körs bara om man loggar in som user
+            {
+                Console.WriteLine("Your bankaccounts and salary:");
+                foreach (var account in accounts)
+                {
+                    Console.WriteLine($"Bankaccount: {account.AccountNumber}, Salary: {account.Balance:C}");
+                }
+            }
+
+        }
+
+        void AddUser()
         {
             List<string> userList = new List<string>();
 
@@ -188,18 +208,14 @@ namespace Grupparbete
 
                     Console.WriteLine("User is added");
                     Console.WriteLine("\n Userlist:");
-                  
+
                     foreach (var user in userList)
                     {
                         Console.WriteLine(user);
                     }
-                    
-                }
-                else if (answer == "no")
-                {
-                    return false;
 
                 }
+
                 else if (answer.ToLower() == "no")
                 {
                     break;
@@ -207,91 +223,6 @@ namespace Grupparbete
                 }
             }
         }
-
-
-        public bool checkAdmin()
-        {
-            Console.Write("Username: ");
-            string adminUsername = Console.ReadLine();
-
-            Console.Write("Password: ");
-            string adminPassword = Console.ReadLine();
-
-            return adminUsername == "admin" && adminPassword == "123";
-        }
-
-
-        private void userLogin()
-        {
-            if (userAttempts < maxAttempts)
-            {
-                if (checkUser())
-                {
-                    Console.WriteLine("Successful login!");
-                    UserMenu(); //Lagt in meny för user som i "Adminmenyn"
-                }
-                else
-                {
-                    userAttempts++;
-                    Console.WriteLine($"Invalid credentials. Attempts left: {maxAttempts - userAttempts}");
-                }
-            }
-            else
-            {
-                Console.WriteLine("Too many failed login attempts. Account has been locked");
-            }
-        }
-
-        private bool checkUser()
-        {
-            Console.Write("Username: ");
-            string userUsername = Console.ReadLine();
-
-            Console.Write("Password: ");
-            string userPassword = Console.ReadLine();
-
-            return userUsername == "user" && userPassword == "123";
-        }
-
-        private List<BankAccount> CreateBankAccounts()
-        {
-            List<BankAccount> userAccounts = new List<BankAccount>();
-            BankAccount acoount1 = new BankAccount("173556889", 20000);
-            BankAccount acoount2 = new BankAccount("587654321", 3000);
-            BankAccount acoount3 = new BankAccount("146853522", 2000);
-
-            userAccounts.Add(acoount1);
-            userAccounts.Add(acoount2);
-            userAccounts.Add(acoount3);
-
- 
-            return userAccounts;
-        }
-
-        private List<BankAccount> AdminBankAccounts()
-        { //Lagt till en lista med bankkonto för admin
-            List<BankAccount> userAccounts = new List<BankAccount>();
-            userAccounts.Add(new BankAccount("463718293", 20000));
-            userAccounts.Add(new BankAccount("175019005", 3000));
-            userAccounts.Add(new BankAccount("658392098", 2000));
-          
-          // Lägg till  add här
-            return userAccounts;
-        }
-
-        private void DisplayUserAccounts(List<BankAccount> accounts)
-        {
-            if (checkUser()) // körs bara om man loggar in som user
-            {
-                Console.WriteLine("Your bankaccounts and salary:");
-                foreach (var account in accounts)
-                {
-                    Console.WriteLine($"Bankaccount: {account.AccountNumber}, Salary: {account.Balance:C}");
-                }
-            }
-           
-        }
-
 
         public void RunApplication()
         {
@@ -317,77 +248,37 @@ namespace Grupparbete
                     default:
                         Console.WriteLine("Invalid role. Please enter either 'Admin' or 'User'.");
                         break;
-
-                        while (true)
-                        {
-                            Console.WriteLine("do you want to transfer? yes/no ");
-
-                            string answer = Console.ReadLine();
-                            //
-                            if (answer == "yes")
-                            {
-                                if (userAccounts.Count >= 2) //Om det finns minst två konton eller fler
-                                {
-                                    BankAccount sourceAccount = userAccounts[0]; // skapar en variabel örsta kontot
-                                    BankAccount destinationAccount = userAccounts[1]; // Andra kontot
-
-                                    Console.WriteLine("transfer...");
-                                    sourceAccount.Transfer(destinationAccount); // Gör överföringen mellan första och andra kontot
-                                    Console.WriteLine("Updated account balances after transfer:");
-                                    DisplayUserAccounts(userAccounts); // Utskrift av nya saldon
-                                }
-
-                                break;
-
-                            }
-                            else if (answer == "no")
-                            {
-                                break;
-                            }
-                        }
-            }
-        }
-
-       
-    }
-
-  /*   class BankAccount
-    {
-        public string AccountNumber { get; } //Vill få värdet men inte kunna ändra
-        public decimal Balance { get; set; } // Värdet kan ändras med set
-
-            adminLogin();
-            List<BankAccount> userAccounts = CreateBankAccounts();
-            DisplayUserAccounts(userAccounts);
-
-            while (true)
-            {
-                Console.WriteLine("do you want to transfer? yes/no ");
-
-                string answer = Console.ReadLine();
-                //
-                if (answer == "yes")
+                }
+            }    
+                while (true)
                 {
-                    if (userAccounts.Count >= 2) //Om det finns minst två konton eller fler
+                    Console.WriteLine("do you want to transfer? yes/no ");
+
+                    string answer = Console.ReadLine();
+                    
+                    if (answer == "yes")
                     {
-                        BankAccount sourceAccount = userAccounts[0]; // skapar en variabel örsta kontot
-                        BankAccount destinationAccount = userAccounts[1]; // Andra kontot
+                        if (userAccounts.Count >= 2) //Om det finns minst två konton eller fler
+                        {
+                            BankAccount sourceAccount = userAccounts[0]; // skapar en variabel örsta kontot
+                            BankAccount destinationAccount = userAccounts[1]; // Andra kontot
 
-                        Console.WriteLine("transfer...");
-                        sourceAccount.Transfer(destinationAccount); // Gör överföringen mellan första och andra kontot
-                        Console.WriteLine("Updated account balances after transfer:");
-                        DisplayUserAccounts(userAccounts); // Utskrift av nya saldon
+                            Console.WriteLine("transfer...");
+                            sourceAccount.Transfer(destinationAccount); // Gör överföringen mellan första och andra kontot
+                            Console.WriteLine("Updated account balances after transfer:");
+                            DisplayUserAccounts(userAccounts); // Utskrift av nya saldon
+                        }
+
+                        break;
+
                     }
-
-                    break;
-
-                }
-                else if (answer == "no")
-                {
-                    break;
+                    else if (answer == "no")
+                    {
+                        break;
+                    }
                 }
 
-            } */
+            }
 
 
         }
@@ -403,31 +294,109 @@ namespace Grupparbete
                 Balance = balance;
             }
             public void Transfer(BankAccount destination)
-{
-    Console.WriteLine("how much do you want to transfer?");
+            {
+                Console.WriteLine("how much do you want to transfer?");
 
-    decimal amount = decimal.Parse(Console.ReadLine()); //TODO: error handling
+                decimal amount = decimal.Parse(Console.ReadLine()); //TODO: error handling
 
-    if (amount > 0 && Balance >= amount)
-    {
+                if (amount > 0 && Balance >= amount)
+                {
 
-        destination.Balance = destination.Balance + amount;
-        Balance = Balance - amount;
-        Console.WriteLine($"transfer successful! {amount} transferd");
-    }
-    else
-    {
-        Console.WriteLine("transfer failed!");
-    }
+                    destination.Balance = destination.Balance + amount;
+                    Balance = Balance - amount;
+                    Console.WriteLine($"transfer successful! {amount} transferd");
+                }
+                else
+                {
+                    Console.WriteLine("transfer failed!");
+                }
 
 
-           
-           
+
+
+            }
+        }
     }
 }
 
-    
-    
+
+
+
+
+
+
+
+/*   class BankAccount
+  {
+      public string AccountNumber { get; } //Vill få värdet men inte kunna ändra
+      public decimal Balance { get; set; } // Värdet kan ändras med set
+
+          adminLogin();
+          List<BankAccount> userAccounts = CreateBankAccounts();
+          DisplayUserAccounts(userAccounts);
+
+          while (true)
+          {
+              Console.WriteLine("do you want to transfer? yes/no ");
+
+              string answer = Console.ReadLine();
+              //
+              if (answer == "yes")
+              {
+                  if (userAccounts.Count >= 2) //Om det finns minst två konton eller fler
+                  {
+                      BankAccount sourceAccount = userAccounts[0]; // skapar en variabel örsta kontot
+                      BankAccount destinationAccount = userAccounts[1]; // Andra kontot
+
+                      Console.WriteLine("transfer...");
+                      sourceAccount.Transfer(destinationAccount); // Gör överföringen mellan första och andra kontot
+                      Console.WriteLine("Updated account balances after transfer:");
+                      DisplayUserAccounts(userAccounts); // Utskrift av nya saldon
+                  }
+
+                  break;
+
+              }
+              else if (answer == "no")
+              {
+                  break;
+              }
+
+          } 
+
+
+
+/*while (true)
+{
+    Console.WriteLine("do you want to transfer? yes/no ");
+
+    string answer = Console.ReadLine();
+
+    if (answer == "yes")
+    {
+        if (userAccounts.Count >= 2) //Om det finns minst två konton eller fler
+        {
+            BankAccount sourceAccount = userAccounts[0]; // skapar en variabel örsta kontot
+            BankAccount destinationAccount = userAccounts[1]; // Andra kontot
+
+            Console.WriteLine("transfer...");
+            sourceAccount.Transfer(destinationAccount); // Gör överföringen mellan första och andra kontot
+            Console.WriteLine("Updated account balances after transfer:");
+            DisplayUserAccounts(userAccounts); // Utskrift av nya saldon
+        }
+
+        break;
+
+    }
+    else if (answer == "no")
+    {
+        break;
+    }
+} */
+
+
+
+
 
 
 
