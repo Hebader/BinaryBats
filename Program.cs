@@ -7,6 +7,7 @@ using System.Reflection.Metadata;
 namespace Grupparbete
 {
     internal class Program 
+
     {
         static void Main(string[] args)
         {
@@ -21,16 +22,13 @@ namespace Grupparbete
 
         public void Run()
         {
-
-            bool condition = true;
             while (true)
             {
-
                 Console.WriteLine("1. Admin login");
                 Console.WriteLine("2. User Login");
                 Console.WriteLine("3. Exit");
 
-                Console.Write("Enter your choice, 1, 2 or 3: ");
+                Console.Write("Enter your choice, 1, 2, or 3: ");
 
                 string choice = Console.ReadLine();
 
@@ -39,7 +37,6 @@ namespace Grupparbete
                     case "1":
                         adminLogin();
                         break;
-
 
                     case "2":
                         userLogin();
@@ -53,12 +50,9 @@ namespace Grupparbete
                         Console.WriteLine("Invalid choice. Please enter a valid option.");
                         break;
                 }
-                if (condition)
-                {
-                    break; // Loopen avbryts om villkoret har uppfyllts 
-                }
             }
         }
+
         public void adminLogin()
         {
             if (adminAttempts < maxAttempts)
@@ -66,27 +60,29 @@ namespace Grupparbete
                 if (checkAdmin())
                 {
                     Console.WriteLine("Successful login!");
+                    AdminMenu(); //Om inloggningen lyckas går den till Admin meny
                 }
                 else
                 {
                     adminAttempts++;
-                    Console.WriteLine($"Invalid  credentials. Login Attempts left: {maxAttempts - adminAttempts}");
+                    Console.WriteLine($"Invalid credentials. Login Attempts left: {maxAttempts - adminAttempts}");
                 }
             }
             else
             {
-                Console.WriteLine("Too many failed login attemps. Account has been locked");
+                Console.WriteLine("Too many failed login attempts. Account has been locked");
             }
+        }
 
-            AddUser(); // Method for adding users
-
-            static void Menu()
+        public void AdminMenu()
+        {
+            while (true)
             {
+                Console.WriteLine("1. Add user");
+                Console.WriteLine("2. Check saldo");
+                Console.WriteLine("3. Logout");
 
-                Console.WriteLine("1. add user");
-                Console.WriteLine("2. check saldo");
-
-                Console.WriteLine("choose between 1,2,3");
+                Console.WriteLine("Choose between 1, 2, or 3");
                 int menu = Convert.ToInt32(Console.ReadLine());
 
                 switch (menu)
@@ -96,52 +92,83 @@ namespace Grupparbete
                         break;
 
                     case 2:
+                        AdminBankAccounts();
                         break;
 
+                    case 3:
+                        return; // Logga ut
 
+                    default:
+                        Console.WriteLine("Invalid choice. Please enter a valid option.");
+                        break;
                 }
             }
-
-            static void AddUser()
+        }
+        public void UserMenu()
+        { //Lagt till en Usermenu och loopat
+            while (true)
             {
-                List<string> userList = new List<string>();
+                //Console.WriteLine("1. Add user");
+                Console.WriteLine("1. Check saldo");
+                Console.WriteLine("2. Logout");
 
-                while (true)
+                Console.WriteLine("Choose between 1 or 2");
+                int menu = Convert.ToInt32(Console.ReadLine());
+
+                switch (menu)
                 {
-                    Console.WriteLine("do you want to add a user? yes/no ");
+                    // case 1:
+                    // AddUser();
+                    // break;
 
-                    string answer = Console.ReadLine();
-
-                    if (answer == "yes")
-                    {
-                        Console.WriteLine("write username: ");
-                        string userName = Console.ReadLine();
-
-                        userList.Add(userName);
-
-                        Console.WriteLine("user is added");
-                        Console.WriteLine("\n userlist: ");
-                        foreach (var user in userList)
-                        {
-                            Console.WriteLine(user);
-                        }
+                    case 1:
+                        CreateBankAccounts();
                         break;
 
-                    }
-                    else if (answer == "no")
-                    {
-                        break;
-                    }
+                    case 2:
+                        return; // Logout option
 
+                    default:
+                        Console.WriteLine("Invalid choice. Please enter a valid option.");
+                        break;
                 }
-
-
             }
         }
 
-        public bool checkAdmin() // Körs en extra gång efter break?
+        public void AddUser()
         {
+            List<string> userList = new List<string>();
 
+            while (true)
+            {
+                Console.WriteLine("Do you want to add a user? yes/no ");
+
+                string answer = Console.ReadLine();
+
+                if (answer == "yes")
+                {
+                    Console.WriteLine("Write username: ");
+                    string userName = Console.ReadLine();
+
+                    userList.Add(userName);
+
+                    Console.WriteLine("User is added");
+                    Console.WriteLine("\n Userlist:");
+                    foreach (var user in userList)
+                    {
+                        Console.WriteLine(user);
+                    }
+                }
+                else if (answer.ToLower() == "no")
+                {
+                    break;
+                }
+            }
+        }
+
+
+        public bool checkAdmin()
+        {
             Console.Write("Username: ");
             string adminUsername = Console.ReadLine();
 
@@ -149,9 +176,7 @@ namespace Grupparbete
             string adminPassword = Console.ReadLine();
 
             return adminUsername == "admin" && adminPassword == "123";
-
-        }
-
+         }
 
         private void userLogin()
         {
@@ -160,6 +185,7 @@ namespace Grupparbete
                 if (checkUser())
                 {
                     Console.WriteLine("Successful login!");
+                    UserMenu(); //Lagt in meny för user som i "Adminmenyn"
                 }
                 else
                 {
@@ -169,9 +195,10 @@ namespace Grupparbete
             }
             else
             {
-                Console.WriteLine("Too many failed login attemps. Account has been locked");
+                Console.WriteLine("Too many failed login attempts. Account has been locked");
             }
         }
+
         private bool checkUser()
         {
             Console.Write("Username: ");
@@ -192,6 +219,15 @@ namespace Grupparbete
             return userAccounts;
         }
 
+        private List<BankAccount> AdminBankAccounts()
+        { //Lagt till en lista med bankkonto för admin
+            List<BankAccount> userAccounts = new List<BankAccount>();
+            userAccounts.Add(new BankAccount("463718293", 20000));
+            userAccounts.Add(new BankAccount("175019005", 3000));
+            userAccounts.Add(new BankAccount("658392098", 2000));
+            return userAccounts;
+        }
+
         private void DisplayUserAccounts(List<BankAccount> accounts)
         {
             Console.WriteLine("Your bankaccounts and salary:");
@@ -205,6 +241,39 @@ namespace Grupparbete
         public void RunApplication()
         {
             Run();
+
+            while (true)
+            {
+                Console.WriteLine("Enter your role: Admin or User");
+                string role = Console.ReadLine().ToLower();
+
+                switch (role)
+                {
+                    case "admin":
+                        adminLogin();
+                        AdminMenu();
+                        break;
+
+                    case "user":
+                        userLogin();
+                        UserMenu();
+                        break;
+
+                    default:
+                        Console.WriteLine("Invalid role. Please enter either 'Admin' or 'User'.");
+                        break;
+                }
+            }
+        }
+
+       
+    }
+
+  /*   class BankAccount
+    {
+        public string AccountNumber { get; } //Vill få värdet men inte kunna ändra
+        public decimal Balance { get; set; } // Värdet kan ändras med set
+
             adminLogin();
             List<BankAccount> userAccounts = CreateBankAccounts();
             DisplayUserAccounts(userAccounts);
@@ -236,7 +305,7 @@ namespace Grupparbete
                     break;
                 }
 
-            }
+            } */
 
 
         }
@@ -254,6 +323,11 @@ namespace Grupparbete
             {
                 Console.WriteLine("how much do you want to transfer?");
 
+
+
+        }
+    }
+}
                 decimal amount = decimal.Parse(Console.ReadLine()); //TODO: error handling
 
                 if (amount > 0 && Balance >= amount)
