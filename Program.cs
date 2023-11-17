@@ -323,8 +323,6 @@ namespace Grupparbete
 
 
 
-*
-
 
 /*   class BankAccount
   {
