@@ -317,7 +317,34 @@ namespace Grupparbete
                     default:
                         Console.WriteLine("Invalid role. Please enter either 'Admin' or 'User'.");
                         break;
-                }
+
+                        while (true)
+                        {
+                            Console.WriteLine("do you want to transfer? yes/no ");
+
+                            string answer = Console.ReadLine();
+                            //
+                            if (answer == "yes")
+                            {
+                                if (userAccounts.Count >= 2) //Om det finns minst två konton eller fler
+                                {
+                                    BankAccount sourceAccount = userAccounts[0]; // skapar en variabel örsta kontot
+                                    BankAccount destinationAccount = userAccounts[1]; // Andra kontot
+
+                                    Console.WriteLine("transfer...");
+                                    sourceAccount.Transfer(destinationAccount); // Gör överföringen mellan första och andra kontot
+                                    Console.WriteLine("Updated account balances after transfer:");
+                                    DisplayUserAccounts(userAccounts); // Utskrift av nya saldon
+                                }
+
+                                break;
+
+                            }
+                            else if (answer == "no")
+                            {
+                                break;
+                            }
+                        }
             }
         }
 
