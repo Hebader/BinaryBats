@@ -29,17 +29,11 @@ namespace Grupparbete
         private int userAttempts = 0;
 
         public void Run()
-
         {
-
             while (true)
-
             {
-
                 Console.WriteLine("1. Admin login");
-
                 Console.WriteLine("2. User Login");
-
                 Console.WriteLine("3. Exit");
 
                 Console.Write("Enter your choice, 1, 2, or 3: ");
@@ -47,45 +41,24 @@ namespace Grupparbete
                 string choice = Console.ReadLine();
 
                 switch (choice)
-
                 {
-
                     case "1":
-
                         adminLogin();
-
-                        if (true)
-
-                        {
-
-                            AdminMenu();
-
-                        }
-
                         break;
 
                     case "2":
-
                         userLogin();
-
                         break;
 
                     case "3":
-
                         Console.WriteLine("Exiting program.");
-
                         return;
 
                     default:
-
                         Console.WriteLine("Invalid choice. Please enter a valid option.");
-
                         break;
-
                 }
-
             }
-
         }
 
         public void adminLogin()
@@ -243,9 +216,11 @@ namespace Grupparbete
 
                 Console.WriteLine("1. Check saldo");
 
-                Console.WriteLine("2. Logout");
+                Console.WriteLine("2. Transfer money");
 
-                Console.WriteLine("Choose between 1 or 2");
+                Console.WriteLine("3. Logout");
+
+                Console.WriteLine("Choose between 1, 2 or 3");
 
                 int menu = Convert.ToInt32(Console.ReadLine());
 
@@ -253,19 +228,20 @@ namespace Grupparbete
 
                 {
 
-                    // case 1:
-
-                    // AddUser();
-
-                    // break;
-
                     case 1:
 
-                        CreateBankAccounts();
+                        List<BankAccount> userAccounts = CreateBankAccounts();
+
+                        DisplayUserAccounts(userAccounts);
 
                         break;
 
                     case 2:
+
+                        TransferMethod();
+                        break;
+
+                    case 3:
 
                         return; // Logout option
 
@@ -393,15 +369,8 @@ namespace Grupparbete
             }
 
         }
-
-        public void RunApplication()
-
+        void TransferMethod()
         {
-
-            Run();
-
-            adminLogin();
-
             List<BankAccount> userAccounts = CreateBankAccounts();
 
             DisplayUserAccounts(userAccounts);
@@ -449,6 +418,16 @@ namespace Grupparbete
                 }
 
             }
+        }
+        public void RunApplication()
+
+        {
+
+            Run();
+
+            adminLogin();
+        
+            
             // hej hej
             while (true)
 
