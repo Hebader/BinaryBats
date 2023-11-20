@@ -22,14 +22,10 @@ namespace Grupparbete
 
         }
 
-        private int maxAttempts = 3;
-
-        private int adminAttempts = 0;
-
-        private int userAttempts = 0;
-
         public void Run()
         {
+            LoginManager loginManager = new LoginManager();
+
             while (true)
             {
                 Console.WriteLine("1. Admin login");
@@ -43,11 +39,11 @@ namespace Grupparbete
                 switch (choice)
                 {
                     case "1":
-                        adminLogin();
+                        adminLogin(loginManager);
                         break;
 
                     case "2":
-                        userLogin();
+                        userLogin(loginManager);
                         break;
 
                     case "3":
@@ -61,38 +57,26 @@ namespace Grupparbete
             }
         }
 
-        public void adminLogin()
-
+        public void adminLogin(LoginManager loginManager)
         {
+            string enterdUsername;
+            string enterdPassword;
 
-            if (adminAttempts < maxAttempts)
-
+            if (loginManager.tryLogin("admin", "123", out enterdUsername, out enterdPassword))
             {
 
-                if (checkAdmin())
+                Console.WriteLine("Successful login!");
 
-                {
-
-                    Console.WriteLine("Successful login!");
-
-                    AdminMenu(); //Om inloggningen lyckas går den till Admin meny
-
-                }
-
-                else
-
-                {
-
-                    adminAttempts++;
-
-                    Console.WriteLine($"Invalid credentials. Login Attempts left: {maxAttempts - adminAttempts}");
-
-                }
+                AdminMenu(); //Om inloggningen lyckas går den till Admin meny
 
             }
-
             else
+            {
 
+                Console.WriteLine($"Invalid credentials. Login Attempts left: {loginManager.maxAttempts - loginManager.Attempts}");
+
+            }
+            if (loginManager.maxAttempts == 3)
             {
 
                 Console.WriteLine("Too many failed login attempts. Account has been locked");
@@ -100,76 +84,30 @@ namespace Grupparbete
             }
 
         }
-
-        void userLogin()
-
+        public void userLogin(LoginManager loginManager)
         {
+            string enterdUsername;
+            string enterdPassword;
 
-            if (userAttempts < maxAttempts)
-
+            if (loginManager.tryLogin("user", "123", out enterdUsername, out enterdPassword))
             {
+                Console.WriteLine("Successful login!");
 
-                if (checkUser())
-
-                {
-
-                    Console.WriteLine("Successful login!");
-
-                    UserMenu(); //Lagt in meny för user som i "Adminmenyn"
-
-                }
-
-                else
-
-                {
-
-                    userAttempts++;
-
-                    Console.WriteLine($"Invalid credentials. Attempts left: {maxAttempts - userAttempts}");
-
-                }
+                UserMenu(); //Om inloggningen lyckas går den till Admin meny
 
             }
-
             else
+            {
 
+                Console.WriteLine($"Invalid credentials. Login Attempts left: {loginManager.maxAttempts - loginManager.Attempts}");
+
+            }
+            if (loginManager.maxAttempts == 3)
             {
 
                 Console.WriteLine("Too many failed login attempts. Account has been locked");
 
             }
-
-        }
-
-        bool checkAdmin()
-
-        {
-
-            Console.Write("Username: ");
-
-            string adminUsername = Console.ReadLine();
-
-            Console.Write("Password: ");
-
-            string adminPassword = Console.ReadLine();
-
-            return adminUsername == "admin" && adminPassword == "123";
-
-        }
-
-        bool checkUser()
-
-        {
-
-            Console.Write("Username: ");
-
-            string userUsername = Console.ReadLine();
-
-            Console.Write("Password: ");
-
-            string userPassword = Console.ReadLine();
-
-            return userUsername == "user" && userPassword == "123";
 
         }
 
@@ -415,10 +353,10 @@ namespace Grupparbete
         public void RunApplication()
 
         {
-
+            LoginManager loginManager = new LoginManager();
             Run();
 
-            adminLogin();
+            adminLogin(loginManager);
         
             
             // hej hej
@@ -436,7 +374,7 @@ namespace Grupparbete
 
                     case "admin":
 
-                        adminLogin();
+                        adminLogin(loginManager);
 
                         AdminMenu();
 
@@ -444,7 +382,7 @@ namespace Grupparbete
 
                     case "user":
 
-                        userLogin();
+                        userLogin(loginManager);
 
                         UserMenu();
 
@@ -457,58 +395,6 @@ namespace Grupparbete
                         break;
 
                 }
-
-            }
-
-        }
-
-        class BankAccount
-
-        {
-
-            public string AccountNumber { get; } //Vill få värdet men inte kunna ändra
-
-            public decimal Balance { get; set; } // Värdet kan ändras med set
-
-            public BankAccount(string accountNumber, decimal balance) //Konstruktor för kontonmr och saldo
-
-            {
-
-                AccountNumber = accountNumber;
-
-                Balance = balance;
-
-            }
-
-            public void Transfer(BankAccount destination)
-
-            {
-
-                Console.WriteLine("how much do you want to transfer?");
-
-                decimal amount = decimal.Parse(Console.ReadLine()); //TODO: error handling
-
-                if (amount > 0 && Balance >= amount)
-
-                {
-
-                    destination.Balance = destination.Balance + amount;
-
-                    Balance = Balance - amount;
-
-                    Console.WriteLine($"transfer successful! {amount} transferd");
-
-                }
-
-                else
-
-                {
-
-                    Console.WriteLine("transfer failed!");
-
-                }
-
-
 
             }
 
