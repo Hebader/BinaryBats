@@ -116,10 +116,9 @@ namespace Grupparbete
             while (true)
             {
                 Console.WriteLine("1. Add user");
-                Console.WriteLine("2. Check saldo");
-                Console.WriteLine("3. Logout");
+                Console.WriteLine("2. Logout");
 
-                Console.WriteLine("Choose between 1, 2, or 3");
+                Console.WriteLine("Choose between 1 or 2");
                 int menu = Convert.ToInt32(Console.ReadLine());
 
                 switch (menu)
@@ -129,11 +128,8 @@ namespace Grupparbete
                         break;
 
                     case 2:
-                        AdminBankAccounts();
-                        break;
+                        return; //logga ut
 
-                    case 3:
-                        return; // Logga ut
 
                     default:
                         Console.WriteLine("Invalid choice. Please enter a valid option.");
@@ -216,23 +212,7 @@ namespace Grupparbete
 
         }
 
-        List<BankAccount> AdminBankAccounts()
-
-        { //Lagt till en lista med bankkonto för admin
-
-            List<BankAccount> userAccounts = new List<BankAccount>();
-
-            userAccounts.Add(new BankAccount("463718293", 20000));
-
-            userAccounts.Add(new BankAccount("175019005", 3000));
-
-            userAccounts.Add(new BankAccount("658392098", 2000));
-
-            // Lägg till  add här
-
-            return userAccounts;
-
-        }
+        
 
         private void DisplayUserAccounts(List<BankAccount> accounts)
 
@@ -407,108 +387,3 @@ namespace Grupparbete
     }
 
 }
-
-/*   class BankAccount
-
-  {
-
-      public string AccountNumber { get; } //Vill få värdet men inte kunna ändra
-
-      public decimal Balance { get; set; } // Värdet kan ändras med set
- 
-          adminLogin();
-
-          List<BankAccount> userAccounts = CreateBankAccounts();
-
-          DisplayUserAccounts(userAccounts);
- 
-          while (true)
-
-          {
-
-              Console.WriteLine("do you want to transfer? yes/no ");
- 
-              string answer = Console.ReadLine();
-
-              //
-
-              if (answer == "yes")
-
-              {
-
-                  if (userAccounts.Count >= 2) //Om det finns minst två konton eller fler
-
-                  {
-
-                      BankAccount sourceAccount = userAccounts[0]; // skapar en variabel örsta kontot
-
-                      BankAccount destinationAccount = userAccounts[1]; // Andra kontot
- 
-                      Console.WriteLine("transfer...");
-
-                      sourceAccount.Transfer(destinationAccount); // Gör överföringen mellan första och andra kontot
-
-                      Console.WriteLine("Updated account balances after transfer:");
-
-                      DisplayUserAccounts(userAccounts); // Utskrift av nya saldon
-
-                  }
- 
-                  break;
- 
-              }
-
-              else if (answer == "no")
-
-              {
-
-                  break;
-
-              }
- 
-          }
- 
- 
-/*while (true)
-
-{
-
-    Console.WriteLine("do you want to transfer? yes/no ");
- 
-    string answer = Console.ReadLine();
- 
-    if (answer == "yes")
-
-    {
-
-        if (userAccounts.Count >= 2) //Om det finns minst två konton eller fler
-
-        {
-
-            BankAccount sourceAccount = userAccounts[0]; // skapar en variabel örsta kontot
-
-            BankAccount destinationAccount = userAccounts[1]; // Andra kontot
- 
-            Console.WriteLine("transfer...");
-
-            sourceAccount.Transfer(destinationAccount); // Gör överföringen mellan första och andra kontot
-
-            Console.WriteLine("Updated account balances after transfer:");
-
-            DisplayUserAccounts(userAccounts); // Utskrift av nya saldon
-
-        }
- 
-        break;
- 
-    }
-
-    else if (answer == "no")
-
-    {
-
-        break;
-
-    }
- 
-} */
