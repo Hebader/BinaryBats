@@ -151,7 +151,9 @@ namespace Grupparbete
                         break;
 
                     case 2:
+                        Run();
                         return; //logga ut
+                        
 
 
                     default:
@@ -196,6 +198,7 @@ namespace Grupparbete
                         break;
 
                     case 3:
+                        Run();
                         return; // Logout option
 
                     default:
