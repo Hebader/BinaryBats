@@ -25,7 +25,7 @@ namespace Grupparbete
         public void Run()
         {
             LoginManager loginManager = new LoginManager();
-
+            
             while (true)
             {
                 Console.WriteLine("1. Admin login");
@@ -48,13 +48,15 @@ namespace Grupparbete
 
                     case "3":
                         Console.WriteLine("Exiting program.");
-                        return;
+                        break; 
 
                     default:
                         Console.WriteLine("Invalid choice. Please enter a valid option.");
                         break;
                 }
-            }
+               
+            } 
+            
         }
 
         public void adminLogin(LoginManager loginManager)
@@ -82,7 +84,6 @@ namespace Grupparbete
                 Console.WriteLine("Too many failed login attempts. Account has been locked");
 
             }
-
         }
         public void userLogin(LoginManager loginManager)
         {
@@ -109,10 +110,12 @@ namespace Grupparbete
 
             }
 
+
         }
 
         public void AdminMenu()
         {
+            
             while (true)
             {
                 Console.WriteLine("1. Add user");
@@ -145,7 +148,6 @@ namespace Grupparbete
         void UserMenu()
 
         { //Lagt till en Usermenu och loopat
-
             while (true)
 
             {
@@ -178,7 +180,6 @@ namespace Grupparbete
                         break;
 
                     case 3:
-
                         return; // Logout option
 
                     default:
