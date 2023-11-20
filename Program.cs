@@ -62,56 +62,73 @@ namespace Grupparbete
 
         public void adminLogin(LoginManager loginManager)
         {
-            string enterdUsername;
-            string enterdPassword;
-
-            if (loginManager.tryLogin("admin", "123", out enterdUsername, out enterdPassword))
+            for (int attempts = 1; attempts <= 3; attempts++)
             {
+                string enterdUsername;
+                string enterdPassword;
 
-                Console.WriteLine("Successful login!");
+                if (loginManager.tryLogin("admin", "123", out enterdUsername, out enterdPassword))
+                {
 
-                AdminMenu(); //Om inloggningen lyckas går den till Admin meny
+                    Console.WriteLine("Successful login!");
+
+                    AdminMenu(); //Om inloggningen lyckas går den till Admin meny
+
+                }
+                else if (attempts < 3)
+                {
+
+                    Console.WriteLine($"Invalid credentials. Login Attempts left: {loginManager.maxAttempts - attempts}");
+
+                }
+                else
+                {
+
+                    Console.WriteLine("Too many failed login attempts. Account has been locked");
+
+
+                }
+
+
 
             }
-            else if (loginManager.maxAttempts == 3)
-            {
-
-                Console.WriteLine("Too many failed login attempts. Account has been locked");
-
-            }
-            else
-            {
-
-                Console.WriteLine($"Invalid credentials. Login Attempts left: {loginManager.maxAttempts - loginManager.Attempts}");
-
-            }
+           
            
         }
         public void userLogin(LoginManager loginManager)
         {
-            string enterdUsername;
-            string enterdPassword;
-
-            if (loginManager.tryLogin("user", "123", out enterdUsername, out enterdPassword))
+            for (int attempts = 1; attempts <= 3; attempts++)
             {
-                Console.WriteLine("Successful login!");
+                string enterdUsername;
+                string enterdPassword;
 
-                UserMenu(); //Om inloggningen lyckas går den till Admin meny
+
+                if (loginManager.tryLogin("user", "123", out enterdUsername, out enterdPassword))
+                {
+                    Console.WriteLine("Successful login!");
+
+
+                    UserMenu(); //Om inloggningen lyckas går den till Admin meny
+
+                }
+                else if (attempts < 3)
+                {
+
+                    Console.WriteLine($"Invalid credentials. Login Attempts left: {loginManager.maxAttempts - attempts}");
+
+                }
+                else 
+                {
+
+                    Console.WriteLine("Too many failed login attempts. Account has been locked");
+
+
+                }
+               
+
 
             }
-            else if (loginManager.maxAttempts == 3)
-            {
-
-                Console.WriteLine("Too many failed login attempts. Account has been locked");
-
-            }
-            else
-            {
-
-                Console.WriteLine($"Invalid credentials. Login Attempts left: {loginManager.maxAttempts - loginManager.Attempts}");
-
-            }
-          
+           
 
 
         }
