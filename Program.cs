@@ -168,9 +168,7 @@ namespace Grupparbete
 
                     case 1:
 
-                        List<BankAccount> userAccounts = CreateBankAccounts();
-
-                        DisplayUserAccounts(userAccounts);
+                        Transfer();
 
                         break;
 
@@ -250,6 +248,14 @@ namespace Grupparbete
 
             }
 
+
+        }
+
+        void Transfer()
+        {
+            List<BankAccount> userAccounts = CreateBankAccounts();
+
+            DisplayUserAccounts(userAccounts);
 
         }
 
