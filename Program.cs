@@ -359,7 +359,7 @@ namespace Grupparbete
             adminLogin(loginManager);
         
             
-            // hej hej
+            
             while (true)
 
             {
