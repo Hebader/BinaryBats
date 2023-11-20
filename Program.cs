@@ -168,7 +168,7 @@ namespace Grupparbete
 
                     case 1:
 
-                        Transfer();
+                        CheckSaldo();
 
                         break;
 
@@ -251,7 +251,7 @@ namespace Grupparbete
 
         }
 
-        void Transfer()
+        void CheckSaldo()
         {
             List<BankAccount> userAccounts = CreateBankAccounts();
 
