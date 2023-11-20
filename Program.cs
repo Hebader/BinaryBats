@@ -48,6 +48,7 @@ namespace Grupparbete
 
                     case "3":
                         Console.WriteLine("Exiting program.");
+                        Environment.Exit(0); // en metod som asvlutar programmet
                         break; 
 
                     default:
@@ -72,18 +73,19 @@ namespace Grupparbete
                 AdminMenu(); //Om inloggningen lyckas går den till Admin meny
 
             }
+            else if (loginManager.maxAttempts == 3)
+            {
+
+                Console.WriteLine("Too many failed login attempts. Account has been locked");
+
+            }
             else
             {
 
                 Console.WriteLine($"Invalid credentials. Login Attempts left: {loginManager.maxAttempts - loginManager.Attempts}");
 
             }
-            if (loginManager.maxAttempts == 3)
-            {
-
-                Console.WriteLine("Too many failed login attempts. Account has been locked");
-
-            }
+           
         }
         public void userLogin(LoginManager loginManager)
         {
@@ -97,18 +99,19 @@ namespace Grupparbete
                 UserMenu(); //Om inloggningen lyckas går den till Admin meny
 
             }
+            else if (loginManager.maxAttempts == 3)
+            {
+
+                Console.WriteLine("Too many failed login attempts. Account has been locked");
+
+            }
             else
             {
 
                 Console.WriteLine($"Invalid credentials. Login Attempts left: {loginManager.maxAttempts - loginManager.Attempts}");
 
             }
-            if (loginManager.maxAttempts == 3)
-            {
-
-                Console.WriteLine("Too many failed login attempts. Account has been locked");
-
-            }
+          
 
 
         }
