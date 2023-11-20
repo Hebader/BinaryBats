@@ -312,8 +312,6 @@ namespace Grupparbete
         {
             List<BankAccount> userAccounts = CreateBankAccounts();
 
-            DisplayUserAccounts(userAccounts);
-
             while (true)
 
             {
