@@ -338,53 +338,18 @@ namespace Grupparbete
 
             }
         }
+
+
         public void RunApplication()
 
         {
             LoginManager loginManager = new LoginManager();
+           
             Run();
 
             adminLogin(loginManager);
-        
+
             
-            
-            while (true)
-
-            {
-
-                Console.WriteLine("Enter your role: Admin or User");
-
-                string role = Console.ReadLine().ToLower();
-
-                switch (role)
-
-                {
-
-                    case "admin":
-
-                        adminLogin(loginManager);
-
-                        AdminMenu();
-
-                        break;
-
-                    case "user":
-
-                        userLogin(loginManager);
-
-                        UserMenu();
-
-                        break;
-
-                    default:
-
-                        Console.WriteLine("Invalid role. Please enter either 'Admin' or 'User'.");
-
-                        break;
-
-                }
-
-            }
 
         }
 
