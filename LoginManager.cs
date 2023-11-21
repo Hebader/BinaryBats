@@ -13,7 +13,7 @@ namespace Grupparbete
 
         public int Attempts = 0;
 
-        public bool tryLogin(string username, string password, out string enterdUsername, out string entredPassword)
+        public bool TryLogin(string username, string password, out string enterdUsername, out string entredPassword)
         {
             Console.Write("Username: ");
             enterdUsername = Console.ReadLine();

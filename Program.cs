@@ -67,7 +67,7 @@ namespace Grupparbete
                 string enterdUsername;
                 string enterdPassword;
 
-                if (loginManager.tryLogin("admin", "123", out enterdUsername, out enterdPassword))
+                if (loginManager.TryLogin("admin", "123", out enterdUsername, out enterdPassword))
                 {
 
                     Console.WriteLine("Successful login!");
@@ -103,7 +103,7 @@ namespace Grupparbete
                 string enterdPassword;
 
 
-                if (loginManager.tryLogin("user", "123", out enterdUsername, out enterdPassword))
+                if (loginManager.TryLogin("user", "123", out enterdUsername, out enterdPassword))
                 {
                     Console.WriteLine("Successful login!");
 
