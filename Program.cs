@@ -21,11 +21,11 @@ namespace Grupparbete
 
         }
 
-        public void Run()
+        public void Run() // Metod
         {
-            LoginManager loginManager = new LoginManager();
+            LoginManager loginManager = new LoginManager(); //Skapar instans av LoginMnager
             
-            while (true)
+            while (true) //Loop för meny
             {
                 Console.WriteLine("1. Admin login");
                 Console.WriteLine("2. User Login");
@@ -38,11 +38,11 @@ namespace Grupparbete
                 switch (choice)
                 {
                     case "1":
-                        adminLogin(loginManager);
+                        adminLogin(loginManager); //Om valet är 1 körs denna metod
                         break;
 
                     case "2":
-                        userLogin(loginManager);
+                        userLogin(loginManager); // Om valet är 2 körs denna metod
                         break;
 
                     case "3":
@@ -61,7 +61,7 @@ namespace Grupparbete
 
         public void adminLogin(LoginManager loginManager)
         {
-            for (int attempts = 1; attempts <= 3; attempts++)
+            for (int attempts = 1; attempts <= 3; attempts++) // Användarens har 3 försök
             {
                 string enterdUsername;
                 string enterdPassword;
@@ -212,19 +212,19 @@ namespace Grupparbete
 
         }
 
-        List<BankAccount> CreateBankAccounts()
+        List<BankAccount> CreateBankAccounts() // Skapar en list-Metod med datatypen BankAccount
 
         {
 
-            List<BankAccount> userAccounts = new List<BankAccount>();
+            List<BankAccount> userAccounts = new List<BankAccount>(); //Skapar en lista av objekt
 
-            BankAccount acoount1 = new BankAccount("173556889", 20000);
+            BankAccount acoount1 = new BankAccount("173556889", 20000); //Sätter värdet om objekten
 
             BankAccount acoount2 = new BankAccount("587654321", 3000);
 
             BankAccount acoount3 = new BankAccount("146853522", 2000);
 
-            userAccounts.Add(acoount1);
+            userAccounts.Add(acoount1); //Lägger till i listan
 
             userAccounts.Add(acoount2);
 
@@ -237,7 +237,7 @@ namespace Grupparbete
 
         
 
-        private void DisplayUserAccounts(List<BankAccount> accounts)
+        private void DisplayUserAccounts(List<BankAccount> accounts) //Metod för att skriva ut alla objekt
 
         {
 
@@ -254,7 +254,7 @@ namespace Grupparbete
 
         }
 
-        void CheckSaldo()
+        void CheckSaldo() // Metod som visar alla kontonnummer och saldon
         {
             List<BankAccount> userAccounts = CreateBankAccounts();
 
@@ -262,7 +262,7 @@ namespace Grupparbete
 
         }
 
-        void AddUser()
+        void AddUser() //Metod för att lägga till användare
 
         {
 
@@ -359,16 +359,13 @@ namespace Grupparbete
         }
 
 
-        public void RunApplication()
+        public void RunApplication() // Metod som kör Run metoden
 
         {
-            LoginManager loginManager = new LoginManager();
+            LoginManager loginManager = new LoginManager(); //Skapar en instans av loginmanager
            
             Run();
-
-            adminLogin(loginManager);
-
-            
+    
 
         }
 
