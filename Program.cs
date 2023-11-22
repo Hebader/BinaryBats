@@ -7,7 +7,6 @@ using System.Reflection.Metadata;
 namespace Grupparbete
 
 {
-
     internal class Program
 
     {
