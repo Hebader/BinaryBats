@@ -23,23 +23,23 @@ namespace Grupparbete
 
         }
 
-        public void Transfer(BankAccount destination)
+        public void Transfer(BankAccount destination) // Metod för att överföra pengar
 
         {
 
             Console.WriteLine("how much do you want to transfer?");
 
-            decimal amount = decimal.Parse(Console.ReadLine()); //TODO: error handling
+            decimal amount = decimal.Parse(Console.ReadLine()); // Omvandlar användarens svar till decimal
 
-            if (amount > 0 && Balance >= amount)
+            if (amount > 0 && Balance >= amount) //Om beloppet är men än 0 och större eller lika med saldot
 
             {
 
-                destination.Balance = destination.Balance + amount;
+                destination.Balance = destination.Balance + amount; // Uppdaterade beloppet
 
-                Balance = Balance - amount;
+                Balance = Balance - amount; // Tar bort det önskade beloppet från saldot på ena kontot
 
-                Console.WriteLine($"transfer successful! {amount} transferd");
+                Console.WriteLine($"transfer successful! {amount} transferd"); 
 
             }
 
