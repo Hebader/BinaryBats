@@ -15,9 +15,9 @@ namespace Grupparbete
 
         {
 
-            Program program = new Program();
+            Program program = new Program(); //Skapar instans
 
-            program.RunApplication();
+            program.RunApplication(); // Annropar metod
 
         }
 
