@@ -32,4 +32,4 @@ We then have a void method that we named “TransferMethod”.
 In the method we put the list of userAccounts from the method “CreateBankAccounts()”.
 We also have a while loop, in the loop the user will be asked if she/he wants to transfer money. We made a if sats with a condition, if there is more than two accounts available then two variables “SourceAccount” and “DestionationAccount” of the objects in the list will be created. By using the transfer method we can let the SourceAccount tranfer money to DestinationAccount .
 After that the updated account balances will be displayed y calling the DisplayUserAccount Method (userAccount).
-Ww lastly have public void RunApplication(). This method first creates a instans from the class LoginManger and then calls the Run() method.
+Lastly we have public void RunApplication(). This method first creates a instans from the class LoginManger and then calls the Run() method.
